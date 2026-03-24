@@ -1,26 +1,19 @@
 const OpenAI = require('openai');
+const { buildPrompt } = require('./prompt');
 
-const client = new OpenAI({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const SYSTEM_PROMPT = require('./prompt');
+async function getCompletion(history, userMessage) {
+  const messages = buildPrompt(history, userMessage);
 
-async function generateReply({ history, message }) {
-  const messages = [
-    { role: 'system', content: SYSTEM_PROMPT },
-    ...history,
-    { role: 'user', content: message },
-  ];
-
-  const response = await client.chat.completions.create({
-    model:       'gpt-4o',
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
     messages,
-    max_tokens:  400,
-    temperature: 0.7,
   });
 
-  return response.choices[0].message.content.trim();
+  return response.choices[0].message.content;
 }
 
-module.exports = { generateReply };
+module.exports = { getCompletion };
