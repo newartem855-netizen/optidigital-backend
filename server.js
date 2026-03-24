@@ -2,13 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
-const { WebSocketServer } = require('ws');
 const logger = require('./src/utils/logger');
 
 const chatRouter = require('./src/routes/chat');
 const leadRouter = require('./src/routes/lead');
-const { handleRealtimeProxy } = require('./src/services/realtime');
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
