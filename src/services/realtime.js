@@ -66,4 +66,8 @@ function handleRealtimeProxy(clientWs) {
   });
 }
 
+<<<<<<< HEAD
 module.exports = { buildPrompt, SYSTEM_PROMPT };
+=======
+module.exports = { buildPrompt, SYSTEM_PROMPT };
+>>>>>>> 2d6df0b (use system prompt in realtime)
