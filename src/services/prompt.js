@@ -103,4 +103,4 @@ function buildPrompt(history, userMessage) {
   ];
 }
 
-module.exports = { buildPrompt };
+module.exports = { buildPrompt, SYSTEM_PROMPT };
