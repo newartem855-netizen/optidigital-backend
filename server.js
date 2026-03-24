@@ -22,11 +22,6 @@ app.get('/health', (req, res) => {
 // HTTP → WS сервер
 const server = http.createServer(app);
 
-const wss = new WebSocketServer({ server, path: '/ws/voice' });
-wss.on('connection', (clientWs) => {
-  logger.info('Voice client connected');
-  handleRealtimeProxy(clientWs);
-});
 
 server.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`);
