@@ -1,4 +1,4 @@
-const { SYSTEM_PROMPT } = require('../../prompt');
+const { SYSTEM_PROMPT } = require('./prompt');
 const WebSocket = require('ws');
 const logger = require('../utils/logger');
 

@@ -1,5 +1,7 @@
+const config = require('../config');
+
 const sessions = {};
-const MAX_HISTORY = 20;
+const MAX_HISTORY = config.memory.maxHistory;
 
 function getMemory(sessionId) {
   return sessions[sessionId] || [];

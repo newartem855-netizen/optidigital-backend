@@ -1,8 +1,8 @@
 const logger = require('../utils/logger');
+const config = require('../config');
 
+const { windowMs, maxRequests } = config.rateLimit;
 const requests = {};
-const WINDOW_MS = 60 * 1000;
-const MAX_REQUESTS = 20;
 
 function antispam(req, res, next) {
   const ip = req.ip || req.connection.remoteAddress;
@@ -10,9 +10,9 @@ function antispam(req, res, next) {
 
   if (!requests[ip]) requests[ip] = [];
 
-  requests[ip] = requests[ip].filter(t => now - t < WINDOW_MS);
+  requests[ip] = requests[ip].filter(t => now - t < windowMs);
 
-  if (requests[ip].length >= MAX_REQUESTS) {
+  if (requests[ip].length >= maxRequests) {
     logger.warn(`Rate limit exceeded for IP: ${ip}`);
     return res.status(429).json({ error: 'Too many requests. Please slow down.' });
   }
